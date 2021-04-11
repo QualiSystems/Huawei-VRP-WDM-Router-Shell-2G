@@ -232,7 +232,7 @@ To connect with Quali users and experts from around the world, ask questions and
 
 ### What's New
 
-For release updates, see the shell's [GitHub releases page](https://github.com/QualiSystems/HuaweiVRPWDMShell2G/releases).
+For release updates, see the shell's [GitHub releases page](https://github.com/QualiSystems/Huawei-VRP-WDM-Shell-2G/releases).
 
 ### Known Issues
 * Model Name may sometimes display unclear value. Example: `dcswitch.34`
