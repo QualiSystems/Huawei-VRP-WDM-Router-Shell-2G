@@ -39,12 +39,12 @@ For detailed information about the shell’s structure and attributes, see the [
 
 Release: **Huawei VRP WDM Shell 2G**
 
-▪ CloudShell version **9.3**
+▪ CloudShell version **9.3** and above
 
 ▪ Other
 
 
-**Note:** If your CloudShell version does not support this shell, you should consider upgrading to a later version of CloudShell or contact customer support. 
+**Note:** If your CloudShell version does not support this shell, you should consider upgrading to the latest version of CloudShell or contact customer support. 
 
 ### Data Model
 
@@ -59,8 +59,13 @@ https://github.com/QualiSystems/cloudshell-standards/blob/master/Documentation/n
 ### Automation
 This section describes the automation (driver) associated with the data model. The shell’s driver is provided as part of the shell package. There are two types of automation processes, Autoload and Resource. Autoload is executed when creating the resource in the **Inventory** dashboard, while resource commands are run in the sandbox.
 
-For detailed information on each of the above commands, see the following section of the Networking Shell Standard:
+Please note, Huawei VRP WDM Shell has some limitations, and implements only the following commands:
+- Inventroy
+- Run Custom Command
+- Run Custom Config Command (hidden)
+- Health Check
 
+For detailed information on each of the above commands, see the following section of the Networking Shell Standard:
 https://github.com/QualiSystems/cloudshell-standards/blob/master/Documentation/networking_standard.md#commands
 
 
