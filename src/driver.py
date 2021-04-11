@@ -1,7 +1,6 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 from cloudshell.shell.core.driver_utils import GlobalLock
-from cloudshell.shell.core.orchestration_save_restore import OrchestrationSaveRestore
 from cloudshell.shell.core.resource_driver_interface import ResourceDriverInterface
 from cloudshell.shell.core.session.cloudshell_session import CloudShellSessionContext
 from cloudshell.shell.core.session.logging_session import LoggingSessionContext
@@ -13,22 +12,18 @@ from cloudshell.shell.standards.networking.resource_config import (
     NetworkingResourceConfig,
 )
 
-from cloudshell.networking.huawei.cli.huawei_cli_handler import HuaweiCli
-from cloudshell.networking.huawei.flows.huawei_autoload_flow import (
+from cloudshell.huawei.wdm.cli.huawei_cli_handler import HuaweiCli
+from cloudshell.huawei.wdm.flows.huawei_autoload_flow import (
     HuaweiSnmpAutoloadFlow as AutoloadFlow,
 )
-from cloudshell.networking.huawei.flows.huawei_configuration_flow import (
-    HuaweiConfigurationFlow as ConfigurationFlow,
-)
-
-from cloudshell.networking.huawei.flows.huawei_run_command_flow import (
+from cloudshell.huawei.wdm.flows.huawei_run_command_flow import (
     HuaweiRunCommandFlow as CommandFlow,
 )
-from cloudshell.networking.huawei.flows.huawei_state_flow import (
+from cloudshell.huawei.wdm.flows.huawei_state_flow import (
     HuaweiStateFlow as StateFlow,
 )
-from cloudshell.networking.huawei.snmp.huawei_snmp_handler import (
-    HuaweiSnmpHandler as SNMPHandler,
+from cloudshell.huawei.wdm.snmp.huawei_snmp_handler import (
+    HuaweiWDMSnmpHandler as SNMPHandler,
 )
 from cloudshell.shell.core.driver_context import (
     AutoLoadCommandContext,
@@ -38,16 +33,16 @@ from cloudshell.shell.core.driver_context import (
 )
 
 
-class HuaweiVRPWDMRouterShellDriver(
+class HuaweiVRPWDMShellDriver(
     ResourceDriverInterface,
     NetworkingResourceDriverInterface,
     GlobalLock
 ):
     SUPPORTED_OS = [r"VRP"]
-    SHELL_NAME = "Huawei VRP WDM Router 2G"
+    SHELL_NAME = "Huawei VRP WDM 2G"
 
     def __init__(self):
-        super(HuaweiVRPWDMRouterShellDriver, self).__init__()
+        super(HuaweiVRPWDMShellDriver, self).__init__()
         self._cli = None
 
     def initialize(self, context: InitCommandContext) -> str:
@@ -205,34 +200,7 @@ class HuaweiVRPWDMRouterShellDriver(
         :param vrf_management_name: VRF management Name
         :return str saved configuration file name
         """
-        with LoggingSessionContext(context) as logger:
-            api = CloudShellSessionContext(context).get_api()
-
-            resource_config = NetworkingResourceConfig.from_context(
-                shell_name=self.SHELL_NAME,
-                supported_os=self.SUPPORTED_OS,
-                context=context,
-                api=api,
-            )
-
-            if not configuration_type:
-                configuration_type = "running"
-
-            if not vrf_management_name:
-                vrf_management_name = resource_config.vrf_management_name
-
-            cli_handler = self._cli.get_cli_handler(resource_config, logger)
-            configuration_flow = ConfigurationFlow(
-                cli_handler=cli_handler, logger=logger, resource_config=resource_config
-            )
-            logger.info("Save started")
-            response = configuration_flow.save(
-                folder_path=folder_path,
-                configuration_type=configuration_type,
-                vrf_management_name=vrf_management_name,
-            )
-            logger.info("Save completed")
-            return response
+        pass
 
     @GlobalLock.lock
     def restore(
@@ -251,37 +219,7 @@ class HuaweiVRPWDMRouterShellDriver(
         :param restore_method: append or override methods
         :param vrf_management_name: VRF management Name
         """
-        with LoggingSessionContext(context) as logger:
-            api = CloudShellSessionContext(context).get_api()
-
-            resource_config = NetworkingResourceConfig.from_context(
-                shell_name=self.SHELL_NAME,
-                supported_os=self.SUPPORTED_OS,
-                context=context,
-                api=api,
-            )
-
-            if not configuration_type:
-                configuration_type = "running"
-
-            if not restore_method:
-                restore_method = "override"
-
-            if not vrf_management_name:
-                vrf_management_name = resource_config.vrf_management_name
-
-            cli_handler = self._cli.get_cli_handler(resource_config, logger)
-            configuration_flow = ConfigurationFlow(
-                cli_handler=cli_handler, logger=logger, resource_config=resource_config
-            )
-            logger.info("Restore started")
-            configuration_flow.restore(
-                path=path,
-                restore_method=restore_method,
-                configuration_type=configuration_type,
-                vrf_management_name=vrf_management_name,
-            )
-            logger.info("Restore completed")
+        pass
 
     @GlobalLock.lock
     def load_firmware(
@@ -309,33 +247,7 @@ class HuaweiVRPWDMRouterShellDriver(
         :param custom_params: json with custom save parameters
         :return str response: response json
         """
-        with LoggingSessionContext(context) as logger:
-            if not mode:
-                mode = "shallow"
-
-            api = CloudShellSessionContext(context).get_api()
-
-            resource_config = NetworkingResourceConfig.from_context(
-                shell_name=self.SHELL_NAME,
-                supported_os=self.SUPPORTED_OS,
-                context=context,
-                api=api,
-            )
-
-            cli_handler = self._cli.get_cli_handler(resource_config, logger)
-            configuration_flow = ConfigurationFlow(
-                cli_handler=cli_handler, logger=logger, resource_config=resource_config
-            )
-
-            logger.info("Orchestration save started")
-            response = configuration_flow.orchestration_save(
-                mode=mode, custom_params=custom_params
-            )
-            response_json = OrchestrationSaveRestore(
-                logger, resource_config.name
-            ).prepare_orchestration_save_result(response)
-            logger.info("Orchestration save completed")
-            return response_json
+        pass
 
     def orchestration_restore(
         self,
@@ -349,27 +261,7 @@ class HuaweiVRPWDMRouterShellDriver(
         :param saved_artifact_info: OrchestrationSavedArtifactInfo json
         :param custom_params: json with custom restore parameters
         """
-        with LoggingSessionContext(context) as logger:
-            api = CloudShellSessionContext(context).get_api()
-
-            resource_config = NetworkingResourceConfig.from_context(
-                shell_name=self.SHELL_NAME,
-                supported_os=self.SUPPORTED_OS,
-                context=context,
-                api=api,
-            )
-
-            cli_handler = self._cli.get_cli_handler(resource_config, logger)
-            configuration_flow = ConfigurationFlow(
-                cli_handler=cli_handler, logger=logger, resource_config=resource_config
-            )
-
-            logger.info("Orchestration restore started")
-            restore_params = OrchestrationSaveRestore(
-                logger, resource_config.name
-            ).parse_orchestration_save_result(saved_artifact_info)
-            configuration_flow.restore(**restore_params)
-            logger.info("Orchestration restore completed")
+        pass
 
     def cleanup(self):
         """Destroy the driver session.

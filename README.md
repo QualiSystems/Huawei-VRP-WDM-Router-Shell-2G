@@ -1,6 +1,6 @@
 ![Image][1]
 
-# **Huawei VRP WDM Router Shell 2G**  
+# **Huawei VRP WDM Shell 2G**  
 
 Release date: April 2021
 
@@ -25,21 +25,21 @@ A shell integrates a device model, application or other technology with CloudShe
 ### Networking Shells
 CloudShell's networking shells provide L2 or L3 connectivity between resources.
 
-### **Huawei VRP WDM Router Shell 2G**
-**Huawei VRP WDM Router Shell 2G** shell provides you with connectivity and management capabilities such as device structure discovery and power management for the resource. 
+### **Huawei VRP WDM Shell 2G**
+**Huawei VRP WDM Shell 2G** shell provides you with management capabilities such as device structure discovery. 
 
 For more information on the device, see the vendor's official product documentation.
 
 ### Standard version
-**Huawei VRP WDM Router Shell 2G** is based on the Networking Shell Standard version **5.0.4**.
+**Huawei VRP WDM Shell 2G** is based on the Networking Shell Standard version **5.0.4**.
 
 For detailed information about the shell’s structure and attributes, see the [Networking Shell Standard](https://github.com/QualiSystems/cloudshell-standards/blob/master/Documentation/networking_standard.md) in GitHub.
 
 ### Requirements
 
-Release: **Huawei VRP WDM Router Shell 2G**
+Release: **Huawei VRP WDM Shell 2G**
 
-▪ CloudShell version **8.2**
+▪ CloudShell version **9.3**
 
 ▪ Other
 
@@ -50,7 +50,7 @@ Release: **Huawei VRP WDM Router Shell 2G**
 
 The shell's data model includes all shell metadata, families, and attributes.
 
-#### **Huawei VRP WDM Router Shell 2G Attributes**
+#### **Huawei VRP WDM Shell 2G Attributes**
 
 The attribute names and types are listed in the following section of the Networking Shell Standard:
 
@@ -65,7 +65,7 @@ https://github.com/QualiSystems/cloudshell-standards/blob/master/Documentation/n
 
 
 # Downloading the Shell
-The **Huawei VRP WDM Router Shell 2G** shell is available from the [Quali Community Integrations](https://community.quali.com/integrations) page. 
+The **Huawei VRP WDM Shell 2G** shell is available from the [Quali Community Integrations](https://community.quali.com/integrations) page. 
 
 Download the files into a temporary location on your local machine. 
 
@@ -73,11 +73,11 @@ The shell comprises:
 
 |File name|Description|
 |:---|:---|
-|Huawei VRP WDM Router Shell 2G.zip|Device shell package|
+|Huawei VRP WDM Shell 2G.zip|Device shell package|
 |cloudshell-networking-huawei-vrp-offline-deps.zip|Shell Python dependencies (for offline deployments only)|
 
 # Importing and Configuring the Shell
-This section describes how to import the **Huawei VRP WDM Router Shell 2G** shell and configure and modify the shell’s devices.
+This section describes how to import the **Huawei VRP WDM Shell 2G** shell and configure and modify the shell’s devices.
 
 ### Importing the shell into CloudShell
 
@@ -123,7 +123,7 @@ For more information, see [Configuring CloudShell to Execute Python Commands in 
 Before PyPi Server was introduced as CloudShell’s Python package management mechanism, the `PythonOfflineRepositoryPath` key was used to set the default offline package repository on the Quali Server machine, and could be used on specific Execution Server machines to set a different folder. 
 
 **To set the offline Python repository:**
-1. Download the *cloudshell-networking-huawei-vrp-offline-deps.zip* file, see [Downloading the Shell](#downloading-the-shell).
+1. Download the *cloudshell-huawei-vrp-wdm-offline-deps.zip* file, see [Downloading the Shell](#downloading-the-shell).
 
 2. Unzip it to a local repository. Make sure the execution server has access to this folder. 
 
@@ -148,7 +148,7 @@ You can also modify existing resources, see [Managing Resources in the Inventory
   1. In the CloudShell Portal, in the **Inventory** dashboard, click **Add New**. 
      ![Image][2]
      
-  2. From the list, select **Huawei VRP WDM Router Shell 2G**.
+  2. From the list, select **Huawei VRP WDM Shell 2G**.
   
   3. Enter the **Name** and **IP address** of the device.
   
@@ -227,7 +227,7 @@ To connect with Quali users and experts from around the world, ask questions and
 
 ### What's New
 
-For release updates, see the shell's [GitHub releases page](https://github.com/QualiSystems/HuaweiVRPRouterShell2G/releases).
+For release updates, see the shell's [GitHub releases page](https://github.com/QualiSystems/HuaweiVRPWDMShell2G/releases).
 
 ### Known Issues
 * Model Name may sometimes display unclear value. Example: `dcswitch.34`

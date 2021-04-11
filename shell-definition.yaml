@@ -1,19 +1,19 @@
 tosca_definitions_version: tosca_simple_yaml_1_0
 
 metadata:
-  template_name: Huawei VRP WDM Router Shell 2G
+  template_name: Huawei VRP WDM Shell 2G
   template_author: Quali
   template_version: 1.0.0
   template_icon: Huawei.png
 
 description: >
-  This Shell supports Huawei Router devices that run VRP
+  This Shell supports Huawei WDM devices that run VRP
 
 imports:
   - cloudshell_standard: cloudshell_networking_standard_5_0_4.yaml
 
 node_types:
-  vendor.router.Huawei VRP WDM Router 2G:
+  vendor.router.Huawei VRP WDM 2G:
     derived_from: cloudshell.nodes.Router
     #properties:
     #  my_property:
@@ -130,5 +130,5 @@ node_types:
         file: Huawei.png
         type: tosca.artifacts.File
       driver:
-        file: HuaweiVRPWDMRouterShell2GDriver.zip
+        file: HuaweiVRPWDMShell2GDriver.zip
         type: tosca.artifacts.File
