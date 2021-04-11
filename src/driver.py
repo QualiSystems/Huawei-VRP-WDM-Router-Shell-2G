@@ -1,5 +1,11 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
+from cloudshell.shell.core.driver_context import (
+    AutoLoadCommandContext,
+    AutoLoadDetails,
+    InitCommandContext,
+    ResourceCommandContext,
+)
 from cloudshell.shell.core.driver_utils import GlobalLock
 from cloudshell.shell.core.resource_driver_interface import ResourceDriverInterface
 from cloudshell.shell.core.session.cloudshell_session import CloudShellSessionContext
@@ -19,24 +25,14 @@ from cloudshell.huawei.wdm.flows.huawei_autoload_flow import (
 from cloudshell.huawei.wdm.flows.huawei_run_command_flow import (
     HuaweiRunCommandFlow as CommandFlow,
 )
-from cloudshell.huawei.wdm.flows.huawei_state_flow import (
-    HuaweiStateFlow as StateFlow,
-)
+from cloudshell.huawei.wdm.flows.huawei_state_flow import HuaweiStateFlow as StateFlow
 from cloudshell.huawei.wdm.snmp.huawei_snmp_handler import (
     HuaweiWDMSnmpHandler as SNMPHandler,
-)
-from cloudshell.shell.core.driver_context import (
-    AutoLoadCommandContext,
-    AutoLoadDetails,
-    InitCommandContext,
-    ResourceCommandContext,
 )
 
 
 class HuaweiVRPWDMShellDriver(
-    ResourceDriverInterface,
-    NetworkingResourceDriverInterface,
-    GlobalLock
+    ResourceDriverInterface, NetworkingResourceDriverInterface, GlobalLock
 ):
     SUPPORTED_OS = [r"VRP"]
     SHELL_NAME = "Huawei VRP WDM 2G"
@@ -119,6 +115,7 @@ class HuaweiVRPWDMShellDriver(
         self, context: ResourceCommandContext, request: str
     ) -> str:
         """Create vlan and add or remove it to/from network interface.
+
         :param context: an object with all Resource Attributes inside
         :param str request: request json
         :return:
