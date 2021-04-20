@@ -19,9 +19,10 @@ from cloudshell.shell.standards.networking.resource_config import (
 )
 
 from cloudshell.huawei.wdm.cli.huawei_cli_handler import HuaweiCli
-from cloudshell.huawei.wdm.flows.huawei_autoload_flow import (
-    HuaweiSnmpAutoloadFlow as AutoloadFlow,
-)
+# from cloudshell.huawei.wdm.flows.huawei_autoload_flow import (
+#     HuaweiSnmpAutoloadFlow as AutoloadFlow,
+# )
+from custom_autoload import CustomAutoloadFlow as AutoloadFlow
 from cloudshell.huawei.wdm.flows.huawei_run_command_flow import (
     HuaweiRunCommandFlow as CommandFlow,
 )
